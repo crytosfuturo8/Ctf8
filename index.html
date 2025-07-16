@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Activación CTF8</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <img src="img/logo.png" class="logo" />
-    <h1>Activar tu billete CTF8</h1>
-    <input id="codigoInput" placeholder="Ej: CTF8-XXXX" />
-    <button onclick="activarCodigo()">Activar</button>
-    <p id="resultado"></p>
-    <img src="img/billete.png" class="billete"/>
+    <h1>Activación de Billete CTF8</h1>
+    <button onclick="connectWallet()">Conectar Wallet</button>
+    <p id="walletAddress"></p>
+    <button onclick="activateBillete()">Activar Billete</button>
+    <p id="status"></p>
   </div>
   <script src="script.js"></script>
 </body>
