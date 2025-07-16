@@ -1,19 +1,59 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Activación CTF8</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; text-align: center; padding: 2em; }
+    .card { background: white; padding: 2em; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: inline-block; max-width: 400px; }
+    button { padding: 10px 20px; font-size: 16px; border: none; background: #008cff; color: white; border-radius: 6px; cursor: pointer; }
+    #status { margin-top: 1em; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Activación de Billete CTF8</h1>
+  <div class="card">
+    <h2>Activar Billete CTF8</h2>
+    <p>Conecta tu billetera para activar tu billete.</p>
     <button onclick="connectWallet()">Conectar Wallet</button>
-    <p id="walletAddress"></p>
-    <button onclick="activateBillete()">Activar Billete</button>
-    <p id="status"></p>
+    <br><br>
+    <button onclick="activarBillete()">Activar Billete</button>
+    <div id="status"></div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    const contractAddress = "0xE3f4110D74e51cBD51ca60317E54155c57855F20";
+    const abi = [{"constant":false,"inputs":[{"name":"recipient","type":"address"},{"name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"type":"function"}];
+    const adminWallet = "0x3156489b2E1bE5066C8aC61EF75f2602F62471C9";
+    let web3;
+    let userAccount;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await web3.eth.getAccounts();
+        userAccount = accounts[0];
+        document.getElementById("status").innerText = "Wallet conectada: " + userAccount;
+      } else {
+        alert("Necesitas MetaMask o Brave Wallet para usar esto.");
+      }
+    }
+
+    async function activarBillete() {
+      if (!userAccount) return alert("Primero conecta tu wallet.");
+      const contract = new web3.eth.Contract(abi, contractAddress);
+      try {
+        await contract.methods.transfer(userAccount, 20).send({ from: adminWallet });
+        await contract.methods.transfer(adminWallet, 8).send({ from: adminWallet });
+        document.getElementById("status").innerText = "✅ Activación exitosa. Tus CTF8 llegarán pronto.";
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "❌ Error en la activación. Intenta de nuevo.";
+      }
+    }
+  </script>
 </body>
 </html>
