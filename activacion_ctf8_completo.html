@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Activar Billete CTF8</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      background: #0f172a;  
+      color: #f8fafc;  
+      text-align: center;  
+      padding: 30px;  
+    }  
+    input, button {  
+      padding: 10px;  
+      margin: 10px;  
+      font-size: 16px;  
+    }  
+    .box {  
+      background: #1e293b;  
+      padding: 20px;  
+      border-radius: 12px;  
+      max-width: 400px;  
+      margin: auto;  
+    }  
+    .billete {
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>  
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>  
+</head>  
+<body>  
+  <div class="box">  
+    <h2>🎫 Activar tu Billete CTF8</h2>  
+    <p>Ingresa tu código único y conecta tu billetera para recibir tus 28 CTF8.</p>  
+    <input type="text" id="codigo" placeholder="Código del billete" /> <br>  
+    <button onclick="conectarWallet()">🔗 Conectar Wallet</button>  
+    <p id="direccion"></p>  
+    <button onclick="activarBillete()">✅ Activar Billete</button>  
+    <p id="mensaje"></p>
+    <div class="billete" id="billeteVirtual"></div>  
+  </div>  
+
+  <script>  
+    let cuenta = "";  
+    const codigosValidos = ["CTF8-001", "CTF8-002", "CTF8-003"];
+    const codigosUsados = {};
+
+    async function conectarWallet() {  
+      if (window.ethereum) {  
+        const cuentas = await ethereum.request({ method: 'eth_requestAccounts' });  
+        cuenta = cuentas[0];  
+        document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;  
+      } else {  
+        alert("Debes tener MetaMask o Brave Wallet instalada");  
+      }  
+    }  
+
+    function activarBillete() {  
+      const codigo = document.getElementById("codigo").value.trim().toUpperCase();  
+      const mensaje = document.getElementById("mensaje");
+      const billete = document.getElementById("billeteVirtual");
+
+      if (!cuenta || !codigo) {  
+        mensaje.innerText = "⚠️ Conecta tu wallet e ingresa un código válido.";  
+        return;  
+      }
+
+      if (!codigosValidos.includes(codigo)) {
+        mensaje.innerText = "❌ Código no válido.";
+        return;
+      }
+
+      if (codigosUsados[codigo]) {
+        mensaje.innerText = "⚠️ Este código ya fue activado.";
+        return;
+      }
+
+      codigosUsados[codigo] = cuenta;
+      mensaje.innerHTML = "✅ Billete activado. Se enviarán 28 CTF8. (8 retenidos)";
+      billete.innerHTML = `
+        🔐 Código: ${codigo} <br>
+        👛 Wallet: ${cuenta} <br>
+        💰 28 CTF8 asignados (20 disponibles después de 60 días)
+      `;
+    }  
+  </script>  
+</body>  
+</html>
