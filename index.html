@@ -1,45 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activar Billete CTF8</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CTF8 - Activación y Panel</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #0f172a;
       color: #f8fafc;
-      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background: #1e293b;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    nav button {
+      background: #334155;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    nav button.active {
+      background: #0ea5e9;
+    }
+    .content {
+      display: none;
       padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
+    .content.active {
+      display: block;
     }
     input, button {
       padding: 10px;
-      margin: 10px;
+      margin: 10px 0;
       font-size: 16px;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
     }
     .box {
       background: #1e293b;
       padding: 20px;
       border-radius: 12px;
-      max-width: 400px;
-      margin: auto;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
 <body>
-  <div class="box">
-    <h2>🎫 Activar tu Billete CTF8</h2>
-    <p>Ingresa tu código único y conecta tu billetera para recibir tus 28 CTF8.</p>
-    <input type="text" id="codigo" placeholder="Código del billete" /> <br>
-    <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
-    <p id="direccion"></p>
-    <button onclick="activarBillete()">✅ Activar Billete</button>
-    <p id="mensaje"></p>
+
+  <nav>
+    <button id="tab1" class="active" onclick="showTab('activacion')">🎫 Activar Billete</button>
+    <button id="tab2" onclick="showTab('panel')">👤 Panel de Usuario</button>
+  </nav>
+
+  <div id="activacion" class="content active">
+    <div class="box">
+      <h2>🎫 Activar tu Billete CTF8</h2>
+      <p>Ingresa tu código único y conecta tu wallet para recibir tus 28 CTF8.</p>
+      <input type="text" id="codigo" placeholder="Código del billete" />
+      <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
+      <p id="direccion"></p>
+      <button onclick="activarBillete()">✅ Activar Billete</button>
+      <p id="mensaje"></p>
+    </div>
+  </div>
+
+  <div id="panel" class="content">
+    <div class="box">
+      <h2>👤 Panel de Usuario</h2>
+      <p>Puedes transferir hasta 20 CTF8 a otra wallet. Los otros 8 están retenidos.</p>
+      <input type="text" id="walletDestino" placeholder="Wallet destino (0x...)" />
+      <input type="number" id="cantidadTransferir" placeholder="Cantidad a transferir (máx 20)" />
+      <button onclick="transferirCTF8()">📤 Enviar CTF8</button>
+      <p id="mensajePanel"></p>
+    </div>
   </div>
 
   <script>
     let cuenta = "";
+
+    function showTab(tabId) {
+      document.querySelectorAll(".content").forEach(div => div.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      document.getElementById("tab" + (tabId === "activacion" ? "1" : "2")).classList.add("active");
+    }
 
     async function conectarWallet() {
       if (window.ethereum) {
@@ -47,7 +101,7 @@
         cuenta = cuentas[0];
         document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;
       } else {
-        alert("Debes tener MetaMask o Brave Wallet instalada");
+        alert("Instala MetaMask o Brave Wallet");
       }
     }
 
@@ -57,13 +111,23 @@
         document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código válido";
         return;
       }
+      // Aquí tú anotas manualmente el código y luego envías 28 CTF8 a esa wallet
+      document.getElementById("mensaje").innerText = "✅ Código válido. Recibirás 28 CTF8 pronto.";
+      console.log("Activación con código:", codigo, "Wallet:", cuenta);
+    }
 
-      document.getElementById("mensaje").innerText = "✅ Billete activado. Tus 28 CTF8 serán enviados en breve.";
-      console.log("Código activado:", codigo);
-      console.log("Wallet:", cuenta);
-
-      // Tú puedes registrar esto manualmente y hacer el envío desde tu wallet admin
+    function transferirCTF8() {
+      const destino = document.getElementById("walletDestino").value;
+      const cantidad = parseFloat(document.getElementById("cantidadTransferir").value);
+      if (!cuenta || !destino || isNaN(cantidad) || cantidad <= 0 || cantidad > 20) {
+        document.getElementById("mensajePanel").innerText = "Verifica los datos. Solo puedes enviar hasta 20 CTF8.";
+        return;
+      }
+      // En una versión real, aquí harías la transacción con Web3
+      document.getElementById("mensajePanel").innerText = `📤 Transferencia simulada: ${cantidad} CTF8 a ${destino}`;
+      console.log("Transferencia:", cantidad, "CTF8 a", destino);
     }
   </script>
+
 </body>
 </html>
