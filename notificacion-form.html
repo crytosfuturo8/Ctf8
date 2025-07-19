@@ -1,48 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notificación Activación CTF8</title>
-  <style>
-    body {
-      background: #0f172a;
-      color: #f8fafc;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-    .box {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 450px;
-      margin: auto;
-    }
-    input, button {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      background: #22c55e;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notificación de Activación</title>
 </head>
 <body>
-  <div class="box">
-    <h2>📩 Notificar Activación Billete</h2>
-    <form action="https://formspree.io/f/xzzvzwwq" method="POST">
-      <input type="text" name="codigo_billete" placeholder="Código del billete" required>
-      <input type="text" name="wallet" placeholder="Wallet del usuario" required>
-      <input type="text" name="fecha_hora" placeholder="Fecha y Hora (opcional)">
-      <button type="submit">✅ Enviar Notificación</button>
-    </form>
-  </div>
+  <form action="https://formspree.io/f/xzzvzwwq" method="POST">
+    <input type="hidden" name="codigo" value="000001">
+    <input type="hidden" name="wallet" value="CUENTA_DEL_USUARIO">
+    <button type="submit">Enviar notificación</button>
+  </form>
 </body>
 </html>
