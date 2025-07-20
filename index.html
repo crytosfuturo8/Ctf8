@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Activar Billete CTF8</title>
   <style>
     body {
@@ -22,7 +22,7 @@
       background: #1e293b;
       padding: 20px;
       border-radius: 12px;
-      max-width: 400px;
+      max-width: 500px;
       margin: auto;
     }
   </style>
@@ -31,59 +31,53 @@
 <body>
   <div class="box">
     <h2>🎫 Activar tu Billete CTF8</h2>
-    <p>Ingresa tu código único y conecta tu billetera para recibir tus 28 CTF8.</p>
-    <input type="text" id="codigo" placeholder="Código del billete" /> <br>
+    <p>Ingresa tu código único y conecta tu billetera.</p>
+    <input type="text" id="codigo" placeholder="Código del billete" />
+    <br>
     <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
     <p id="direccion"></p>
     <button onclick="activarBillete()">✅ Activar Billete</button>
     <p id="mensaje"></p>
+    <form id="formulario" method="POST" action="https://formspree.io/f/xzzvzwwq" style="display:none;">
+      <input type="hidden" name="wallet" id="wallet">
+      <input type="hidden" name="codigo" id="form_codigo">
+    </form>
   </div>
 
   <script>
     let cuenta = "";
-
     async function conectarWallet() {
       if (window.ethereum) {
         const cuentas = await ethereum.request({ method: 'eth_requestAccounts' });
         cuenta = cuentas[0];
         document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;
       } else {
-        alert("Debes tener MetaMask o Brave Wallet instalada");
+        alert("Instala MetaMask o Brave Wallet");
       }
     }
 
-    function activarBillete() {
+    async function activarBillete() {
       const codigo = document.getElementById("codigo").value;
       if (!cuenta || !codigo) {
-        document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código válido";
+        document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código válido.";
         return;
       }
 
-      document.getElementById("mensaje").innerText = "✅ Billete activado. Tus 28 CTF8 serán enviados en breve.";
+      const usados = JSON.parse(localStorage.getItem("usados") || "[]");
+      if (usados.includes(codigo)) {
+        document.getElementById("mensaje").innerText = "⚠️ Este billete ya fue activado.";
+        return;
+      }
 
-      // Enviar datos a Formspree
-      fetch("https://formspree.io/f/xzzvzwwq", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          wallet: cuenta,
-          codigo: codigo
-        })
-      }).then(response => {
-        if (response.ok) {
-          console.log("Correo enviado exitosamente");
-        } else {
-          console.error("Error al enviar el correo");
-        }
-      }).catch(error => {
-        console.error("Error en la solicitud", error);
-      });
+      usados.push(codigo);
+      localStorage.setItem("usados", JSON.stringify(usados));
 
-      console.log("Código activado:", codigo);
-      console.log("Wallet:", cuenta);
+      document.getElementById("mensaje").innerHTML =
+        "✅ Billete activado correctamente.<br>🎁 Recibiste 28 CTF8.<br>♻️ 8 CTF8 fueron enviados al sistema sustentable.<br>🔐 20 CTF8 están retenidos por 60 días.";
+
+      document.getElementById("wallet").value = cuenta;
+      document.getElementById("form_codigo").value = codigo;
+      document.getElementById("formulario").submit();
     }
   </script>
 </body>

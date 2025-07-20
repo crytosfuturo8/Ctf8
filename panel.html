@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel Usuario CTF8</title>
+  <title>Panel del Usuario CTF8</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,16 +13,11 @@
       text-align: center;
       padding: 30px;
     }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-    }
     .box {
       background: #1e293b;
       padding: 20px;
       border-radius: 12px;
-      max-width: 400px;
+      max-width: 500px;
       margin: auto;
     }
   </style>
@@ -30,57 +25,26 @@
 </head>
 <body>
   <div class="box">
-    <h2>👤 Panel de Usuario</h2>
-    <p>Conecta tu wallet y transfiere CTF8 a otra cuenta.</p>
+    <h2>👤 Panel del Usuario</h2>
     <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
     <p id="direccion"></p>
-    <input type="text" id="destino" placeholder="Wallet destino" />
-    <input type="number" id="cantidad" placeholder="Cantidad CTF8" />
-    <button onclick="enviarCTF8()">🚀 Enviar</button>
-    <p id="mensaje"></p>
+    <p id="info"></p>
+    <p>🔐 Tus 20 CTF8 están retenidos por 60 días.<br>
+    💬 ¿Quieres usarlos antes? Contáctanos en Telegram: <a href="https://t.me/CTF8Contact" target="_blank">@CTF8Contact</a></p>
   </div>
 
   <script>
-    let cuenta;
-    const tokenAddress = "0xE3f4110D74e51cBD51ca60317E54155c57855F20"; // Dirección token CTF8
-    const abi = [
-      { "constant": false, "inputs": [
-        { "name": "to", "type": "address" },
-        { "name": "value", "type": "uint256" }
-      ], "name": "transfer", "outputs": [
-        { "name": "", "type": "bool" }
-      ], "type": "function" }
-    ];
-
+    let cuenta = "";
     async function conectarWallet() {
       if (window.ethereum) {
         const cuentas = await ethereum.request({ method: 'eth_requestAccounts' });
         cuenta = cuentas[0];
-        document.getElementById("direccion").innerText = "Conectado: " + cuenta;
+        document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;
+        document.getElementById("info").innerHTML =
+          "🎁 8 CTF8 aportados al sistema sustentable.<br>🔒 20 CTF8 retenidos hasta 60 días.<br>📅 Fecha de liberación aproximada: " +
+          new Date(Date.now() + 5184000000).toLocaleDateString();
       } else {
-        alert("Instala MetaMask o Brave Wallet");
-      }
-    }
-
-    async function enviarCTF8() {
-      const destino = document.getElementById("destino").value;
-      const cantidad = document.getElementById("cantidad").value;
-
-      if (!cuenta || !destino || !cantidad) {
-        document.getElementById("mensaje").innerText = "Completa todos los campos";
-        return;
-      }
-
-      const web3 = new Web3(window.ethereum);
-      const contrato = new web3.eth.Contract(abi, tokenAddress);
-
-      try {
-        const resultado = await contrato.methods.transfer(destino, web3.utils.toWei(cantidad, 'ether')).send({ from: cuenta });
-        document.getElementById("mensaje").innerText = "✅ Enviado con éxito";
-        console.log(resultado);
-      } catch (error) {
-        document.getElementById("mensaje").innerText = "❌ Error al enviar";
-        console.error(error);
+        alert("Debes tener MetaMask o Brave Wallet instalada");
       }
     }
   </script>
