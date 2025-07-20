@@ -2,50 +2,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel del Usuario CTF8</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel de Usuario CTF8</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      text-align: center;
-      padding: 30px;
-    }
-    .box {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: auto;
-    }
+    body { font-family: Arial; background: #0f172a; color: white; text-align: center; padding: 20px; }
+    .box { background: #1e293b; padding: 20px; border-radius: 10px; margin: auto; max-width: 400px; }
+    input, button { padding: 10px; margin: 5px; width: 80%; }
+    a { color: #38bdf8; display: block; margin-top: 20px; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
 <body>
   <div class="box">
     <h2>👤 Panel del Usuario</h2>
-    <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
-    <p id="direccion"></p>
-    <p id="info"></p>
-    <p>🔐 Tus 20 CTF8 están retenidos por 60 días.<br>
-    💬 ¿Quieres usarlos antes? Contáctanos en Telegram: <a href="https://t.me/CTF8Contact" target="_blank">@CTF8Contact</a></p>
+    <p>Enviar CTF8 a otra wallet:</p>
+    <input type="text" id="walletDestino" placeholder="Wallet destino"/><br/>
+    <input type="number" id="cantidad" placeholder="Cantidad de CTF8"/><br/>
+    <button onclick="enviar()">📤 Enviar</button>
+    <p id="mensaje"></p>
+    <p><strong>⚠️ Recuerda:</strong> 20 CTF8 están retenidos 60 días. Si quieres vender antes, contáctanos en Telegram: @ctf8_admin</p>
+    <a href="index.html">Volver al inicio</a>
   </div>
-
   <script>
-    let cuenta = "";
-    async function conectarWallet() {
-      if (window.ethereum) {
-        const cuentas = await ethereum.request({ method: 'eth_requestAccounts' });
-        cuenta = cuentas[0];
-        document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;
-        document.getElementById("info").innerHTML =
-          "🎁 8 CTF8 aportados al sistema sustentable.<br>🔒 20 CTF8 retenidos hasta 60 días.<br>📅 Fecha de liberación aproximada: " +
-          new Date(Date.now() + 5184000000).toLocaleDateString();
-      } else {
-        alert("Debes tener MetaMask o Brave Wallet instalada");
-      }
+    async function enviar() {
+      const destino = document.getElementById("walletDestino").value;
+      const cantidad = document.getElementById("cantidad").value;
+      document.getElementById("mensaje").innerText = "⚙️ Enviando... (simulado)";
+      setTimeout(() => {
+        document.getElementById("mensaje").innerText = "✅ Enviado correctamente (simulado)";
+      }, 1500);
     }
   </script>
 </body>

@@ -2,82 +2,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activar Billete CTF8</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CTF8 - Activación de Billete</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      text-align: center;
-      padding: 30px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-    }
-    .box {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: auto;
-    }
+    body { font-family: Arial; background: #0f172a; color: white; text-align: center; padding: 20px; }
+    .box { background: #1e293b; padding: 20px; border-radius: 10px; margin: auto; max-width: 400px; }
+    input, button { padding: 10px; margin: 5px; width: 80%; }
+    a { color: #38bdf8; display: block; margin-top: 20px; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
 <body>
   <div class="box">
-    <h2>🎫 Activar tu Billete CTF8</h2>
-    <p>Ingresa tu código único y conecta tu billetera.</p>
-    <input type="text" id="codigo" placeholder="Código del billete" />
-    <br>
-    <button onclick="conectarWallet()">🔗 Conectar Wallet</button>
-    <p id="direccion"></p>
-    <button onclick="activarBillete()">✅ Activar Billete</button>
+    <h2>🎫 Activar Billete CTF8</h2>
+    <p>Ingresa tu código y conecta tu wallet:</p>
+    <input type="text" id="codigo" placeholder="Código del billete"/><br/>
+    <button onclick="conectarWallet()">🔗 Conectar Wallet</button><br/>
+    <button onclick="activarBillete()">✅ Activar</button>
     <p id="mensaje"></p>
-    <form id="formulario" method="POST" action="https://formspree.io/f/xzzvzwwq" style="display:none;">
-      <input type="hidden" name="wallet" id="wallet">
-      <input type="hidden" name="codigo" id="form_codigo">
-    </form>
+    <a href="panel.html">Ir al Panel del Usuario</a>
+    <a href="tutorial.html">📘 Ver Tutorial</a>
   </div>
-
   <script>
     let cuenta = "";
     async function conectarWallet() {
       if (window.ethereum) {
-        const cuentas = await ethereum.request({ method: 'eth_requestAccounts' });
+        const cuentas = await window.ethereum.request({ method: 'eth_requestAccounts' });
         cuenta = cuentas[0];
-        document.getElementById("direccion").innerText = "Wallet conectada: " + cuenta;
+        document.getElementById("mensaje").innerText = "Wallet conectada: " + cuenta;
       } else {
-        alert("Instala MetaMask o Brave Wallet");
+        alert("Instala MetaMask o usa Brave.");
       }
     }
-
-    async function activarBillete() {
+    function activarBillete() {
       const codigo = document.getElementById("codigo").value;
       if (!cuenta || !codigo) {
-        document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código válido.";
+        document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código.";
         return;
       }
-
-      const usados = JSON.parse(localStorage.getItem("usados") || "[]");
-      if (usados.includes(codigo)) {
-        document.getElementById("mensaje").innerText = "⚠️ Este billete ya fue activado.";
-        return;
-      }
-
-      usados.push(codigo);
-      localStorage.setItem("usados", JSON.stringify(usados));
-
-      document.getElementById("mensaje").innerHTML =
-        "✅ Billete activado correctamente.<br>🎁 Recibiste 28 CTF8.<br>♻️ 8 CTF8 fueron enviados al sistema sustentable.<br>🔐 20 CTF8 están retenidos por 60 días.";
-
-      document.getElementById("wallet").value = cuenta;
-      document.getElementById("form_codigo").value = codigo;
-      document.getElementById("formulario").submit();
+      fetch("https://formspree.io/f/xzzvzwwq", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ wallet: cuenta, codigo: codigo })
+      });
+      document.getElementById("mensaje").innerText = "✅ Activación registrada. En breve recibirás 28 CTF8.";
     }
   </script>
 </body>
