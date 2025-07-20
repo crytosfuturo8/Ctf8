@@ -30,3 +30,70 @@
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen>
 </iframe>
+
+import React from 'react';
+
+export default function TutorialCTF8() {
+  return (
+    <div style={{ padding: '20px', maxWidth: '700px', margin: '0 auto' }}>
+      <h2>🎥 Tutorial: Cómo importar el token CTF8 en MetaMask</h2>
+
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/hmMY6LbjhRk"
+        title="Cómo importar token en MetaMask"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+
+      <h3 style={{ marginTop: '30px' }}>📄 Instrucciones en PDF</h3>
+      <p>Puedes descargar el manual paso a paso en formato PDF aquí:</p>
+      <a
+        href="/manual-importar-ctf8.pdf"
+        download
+        style={{
+          display: 'inline-block',
+          backgroundColor: '#0088cc',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          fontWeight: 'bold'
+        }}
+      >
+        Descargar PDF
+      </a>
+
+      <h3 style={{ marginTop: '30px' }}>🔗 Contrato del token CTF8</h3>
+      <p>Este es el contrato oficial que debes copiar para importar el token:</p>
+      <code
+        style={{
+          display: 'block',
+          backgroundColor: '#f5f5f5',
+          padding: '10px',
+          borderRadius: '5px',
+          wordBreak: 'break-all',
+          fontSize: '16px'
+        }}
+      >
+        0xE3f4110D74e51cBD51ca60317E54155c57855F20
+      </code>
+
+      <a
+        href="https://bscscan.com/token/0xE3f4110D74e51cBD51ca60317E54155F20"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          marginTop: '10px',
+          display: 'inline-block',
+          color: '#007bff',
+          textDecoration: 'underline'
+        }}
+      >
+        Ver en BscScan
+      </a>
+    </div>
+  );
+}
