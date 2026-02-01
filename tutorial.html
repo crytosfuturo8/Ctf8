@@ -1,97 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CTF8 - Tutorial</title>
 
-
-export default function Tutorial() {
-  return (
-    <div style={{ padding: '30px', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ color: '#2d3748' }}>🎓 Tutorial: Cómo importar el token CTF8 en MetaMask</h1>
-
-      <p style={{ marginBottom: '20px' }}>
-        Aprende paso a paso cómo importar tu token CTF8 usando la app MetaMask desde tu celular.
-      </p>
-
-      <div style={{ marginBottom: '40px' }}>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/hmMY6LbjhRk"
-          title="Cómo importar token en MetaMask"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-
-      <h2 style={{ color: '#2b6cb0' }}>📄 Descarga el manual en PDF</h2>
-      <p>Puedes descargar el manual paso a paso en formato PDF aquí:</p>
-      <a
-        href="/manual-importar-ctf8.pdf"
-        download
-        <style> body }
+<style>
+  body {
     font-family: Arial;
+
     background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    margin: 0;
+    padding: 20px;
     color: white;
     text-align: center;
-    padding: 20px;
   }
 
-  .box {
+  .container {
     background: rgba(30, 41, 59, 0.85);
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
     margin: auto;
-    max-width: 400px;
+    max-width: 800px;
   }
 
-  input, button {
-    padding: 10px;
-    margin: 5px;
-    width: 80%;
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  .link-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
   }
 
   a {
     color: #38bdf8;
-    display: block;
-    margin-top: 20px;
+    font-size: 18px;
+    text-decoration: none;
   }
-      </style>
-        }}
-      >
-        📥 Descargar PDF
-      </a>
 
-      <h2 style={{ marginTop: '40px', color: '#2b6cb0' }}>🔗 Contrato oficial del token CTF8</h2>
-      <p>Copia este contrato para importar el token en MetaMask:</p>
-      <code
-        style={{
-          backgroundColor: '#edf2f7',
-          padding: '12px',
-          borderRadius: '6px',
-          display: 'block',
-          fontSize: '16px',
-          wordBreak: 'break-all',
-          marginTop: '10px'
-        }}
-      >
-        0xE3f4110D74e51cBD51ca60317E54155c57855F20
-      </code>
+  a:hover {
+    text-decoration: underline;
+  }
 
-      <a
-        href="https://bscscan.com/token/0xE3f4110D74e51cBD51ca60317E54155F20"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: 'inline-block',
-          marginTop: '12px',
-          color: '#2b6cb0',
-          fontWeight: 'bold',
-          textDecoration: 'underline'
-        }}
-      >
-        🌐 Ver en BscScan
-      </a>
-    </div>
-  );
-}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>📘 Tutorial CTF8</h1>
+
+  <p>
+    En este tutorial aprenderás cómo activar tu billete CTF8,
+    importar el token en MetaMask y comenzar a usar tu moneda digital.
+  </p>
+
+  <div class="link-box">
+    <h3>👉 Ver tutorial completo aquí:</h3>
+
+    <a href="https://www.youtube.com/" target="_blank">
+      Ver Tutorial en YouTube
+    </a>
+  </div>
+
+  <p>
+    También puedes descargar el manual en PDF con todos los pasos detallados.
+  </p>
+
+  <a href="manual_ctf8.pdf" download>
+    📥 Descargar manual PDF
+  </a>
+
+  <br><br>
+
+  <a href="index.html">⬅ Volver a Activación</a>
+
+</div>
+
+</body>
+</html>
