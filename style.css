@@ -14,7 +14,10 @@ input, button {
   font-size: 16px;
 }
 .box {
-  
+  background-image: url('file_000000008a8071f5b63d2554060b50ce.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
   padding: 20px;
   border-radius: 12px;
   max-width: 400px;
