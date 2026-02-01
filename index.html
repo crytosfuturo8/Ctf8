@@ -65,7 +65,6 @@
       font-weight: bold;
       word-break: break-all;
     }
-
   </style>
 
 </head>
@@ -93,6 +92,12 @@
     <a href="tutorial.html">📘 Ver Tutorial</a>
   </div>
 
+  <!-- FORMULARIO OCULTO PARA ENVÍO DE CORREO -->
+  <form id="formCorreo" action="https://formspree.io/f/xzzvzwwq" method="POST" style="display:none;">
+    <input type="text" name="wallet" id="correoWallet">
+    <input type="text" name="codigo" id="correoCodigo">
+  </form>
+
   <script>
 
     let cuenta = "";
@@ -114,7 +119,7 @@
 
         cuenta = cuentas[0];
 
-        // Forzar red Binance Smart Chain
+        // Cambiar automáticamente a Binance Smart Chain
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
@@ -163,10 +168,15 @@
         return;
       }
 
-      document.getElementById("mensaje").innerText =
-        "Billete activado para la wallet: " + cuenta;
+      // Pasar datos al formulario oculto
+      document.getElementById("correoWallet").value = cuenta;
+      document.getElementById("correoCodigo").value = codigo;
 
-      // Aquí después conectaremos con tu sistema de correos y base de datos
+      // Enviar correo con Formspree
+      document.getElementById("formCorreo").submit();
+
+      document.getElementById("mensaje").innerText =
+        "Billete activado y correo enviado para la wallet: " + cuenta;
 
     }
 
