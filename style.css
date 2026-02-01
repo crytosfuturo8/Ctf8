@@ -1,9 +1,11 @@
 body {
-  font-family: Arial, sans-serif;
-    background-image: url('file_000000008a8071f5b63d2554060b50ce.png');
+    font-family: Arial, sans-serif;
+
+    background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     color: #f8fafc;
     text-align: center;
     padding: 30px;
