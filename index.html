@@ -1,122 +1,115 @@
- 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CTF8 - Activación de Billete</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activar Billete CTF8</title>
 
-  <style>
-    body {
-      font-family: Arial;
+<style>
+body {
+  font-family: Arial;
 
-      /* IMAGEN DE PIRÁMIDES COMO FONDO */
-      background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+  background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
 
-    .box {
-      background: rgba(30, 41, 59, 0.85);
-      padding: 20px;
-      border-radius: 10px;
-      margin: auto;
-      max-width: 450px;
-    }
+.box {
+  background: rgba(30, 41, 59, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  max-width: 450px;
+}
 
-    input, button {
-      padding: 10px;
-      margin: 5px;
-      width: 90%;
-      border-radius: 5px;
-      border: none;
-    }
+input, button {
+  padding: 10px;
+  margin: 5px;
+  width: 90%;
+  border-radius: 5px;
+  border: none;
+}
 
-    button {
-      background: #38bdf8;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
+button {
+  background: #38bdf8;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    button:hover {
-      background: #0ea5e9;
-    }
+button:hover {
+  background: #0ea5e9;
+}
 
-    .descargar {
-      background: orange;
-      color: black;
-    }
+.descargar {
+  background: orange;
+  color: black;
+}
 
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: #38bdf8;
-      display: block;
-      margin-top: 10px;
-    }
-  </style>
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+</style>
 
 </head>
 
 <body>
 
-  <div class="box">
+<div class="box">
 
-    <h2>🎫 Activar Billete CTF8</h2>
+<h2>🎫 Activar Billete CTF8</h2>
 
-    <!-- IMAGEN DE LA SILLA (NO SE BORRA) -->
-    <img src="img/silla.jpg" alt="Imagen del billete CTF8">
+<!-- TU IMAGEN DE LA SILLA -->
+<img src="img/silla.jpg" alt="Imagen del billete CTF8">
 
-    <p>Ingresa tu código del billete y tu dirección de wallet:</p>
+<p>Ingresa tu código y tu dirección de wallet:</p>
 
-    <form id="formulario">
+<form
+  id="formulario"
+  action="https://formspree.io/f/xzzvzwwq"
+  method="POST"
+>
 
-      <label>Código del Billete:</label><br>
-      <input type="text" id="codigo" placeholder="Ej: CTF8-12345" required>
+<label>Código del Billete:</label><br>
+<input type="text" name="codigo" placeholder="Ej: CTF8-12345" required>
 
-      <br>
+<br>
 
-      <label>Tu Wallet (Metamask / BSC):</label><br>
-      <input type="text" id="wallet" placeholder="0x..." required>
+<label>Tu Wallet (Metamask / BSC):</label><br>
+<input type="text" name="wallet" placeholder="0x..." required>
 
-      <br>
+<br>
 
-      <button type="submit">✅ Enviar Activación</button>
+<button type="submit">✅ Enviar Activación</button>
 
-    </form>
+</form>
 
-    <br>
+<br>
 
-    <a href="https://metamask.io/download/" target="_blank">
-      <button class="descargar">Descargar Metamask</button>
-    </a>
+<a href="https://metamask.io/download/" target="_blank">
+  <button class="descargar">Descargar Metamask</button>
+</a>
 
-    <p id="mensaje"></p>
+<p id="mensaje"></p>
 
-    <a href="panel.html">Ir al Panel del Usuario</a>
-    <a href="tutorial.html">📘 Ver Tutorial</a>
+</div>
 
-  </div>
+<script>
+const form = document.getElementById("formulario");
 
-  <script>
-    const form = document.getElementById("formulario");
+form.addEventListener("submit", function() {
+  document.getElementById("mensaje").innerText =
+    "Enviando solicitud...";
+});
+</script>
 
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const codigo = document.getElementById("codigo").value;
-      const wallet = document.getElementById("wallet").value;
-
-      if (!codigo || !wallet) {
-        document.getElementById("mensaje").innerText =
-          "Debes ingresar
+</body>
+</html>
