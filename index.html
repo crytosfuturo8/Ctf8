@@ -2,185 +2,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CTF8 - Activación de Billete</title>
+<meta charset="UTF-8">
+<title>Activación Billete CTF8</title>
 
-  <style>
-    body {
-      font-family: Arial;
+<style>
+body {
+  font-family: Arial;
+  background: #111;
+  color: white;
+  text-align: center;
+}
 
-      background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+.contenedor {
+  background: #222;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  border-radius: 10px;
+}
 
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
 
-    .box {
-      background: rgba(30, 41, 59, 0.9);
-      padding: 25px;
-      border-radius: 10px;
-      margin: auto;
-      max-width: 420px;
-      border: 2px solid #38bdf8;
-    }
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #28a745;
+  color: white;
+  cursor: pointer;
+}
 
-    input, button {
-      padding: 12px;
-      margin: 8px;
-      width: 85%;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    button {
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn-metamask {
-      background: #f6851b;
-      color: white;
-    }
-
-    .btn-activar {
-      background: #10b981;
-      color: white;
-    }
-
-    a {
-      color: #38bdf8;
-      display: block;
-      margin-top: 15px;
-      text-decoration: none;
-    }
-
-    #mensaje {
-      margin-top: 15px;
-      font-weight: bold;
-      word-break: break-all;
-    }
-  </style>
+.descargar {
+  background: #f6851b;
+}
+</style>
 
 </head>
-
 <body>
 
-  <div class="box">
-    <h2>🎫 Activar moneda CTF8</h2>
+<h2>Activar Billete CTF8</h2>
 
-    <p>Ingresa tu código y conecta MetaMask:</p>
+<div class="contenedor">
 
-    <input type="text" id="codigo" placeholder="Código del billete"/><br/>
+<form id="formulario">
 
-    <button class="btn-metamask" onclick="conectarWallet()">
-      🦊 Conectar con MetaMask (BSC)
-    </button><br/>
+  <label>Código del Billete:</label><br>
+  <input type="text" id="codigo" placeholder="Ej: CTF8-12345" required>
 
-    <button class="btn-activar" onclick="activarBillete()">
-      ✅ Activar Billete CTF8
-    </button>
+  <br>
 
-    <p id="mensaje"></p>
+  <label>Tu Dirección de Wallet (Metamask):</label><br>
+  <input type="text" id="wallet" placeholder="0x..." required>
 
-    <a href="panel.html">Ir al Panel del Usuario</a>
-    <a href="tutorial.html">📘 Ver Tutorial</a>
-  </div>
+  <br>
 
-  <!-- FORMULARIO OCULTO PARA ENVÍO DE CORREO -->
-  <form id="formCorreo" action="https://formspree.io/f/xzzvzwwq" method="POST" style="display:none;">
-    <input type="text" name="wallet" id="correoWallet">
-    <input type="text" name="codigo" id="correoCodigo">
-  </form>
+  <button type="submit">Activar Billete</button>
 
-  <script>
+</form>
 
-    let cuenta = "";
+<br>
 
-    async function conectarWallet() {
+<a href="https://metamask.io/download/" target="_blank">
+  <button class="descargar">Descargar Metamask</button>
+</a>
 
-      if (!window.ethereum) {
-        alert("Debes instalar MetaMask para usar CTF8");
-        window.open("https://metamask.io/download.html", "_blank");
-        return;
-      }
+<p id="mensaje"></p>
 
-      try {
+</div>
 
-        // Conectar MetaMask
-        const cuentas = await window.ethereum.request({
-          method: 'eth_requestAccounts'
-        });
+<script>
 
-        cuenta = cuentas[0];
+document.getElementById("formulario").addEventListener("submit", function(e) {
 
-        // Cambiar automáticamente a Binance Smart Chain
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0x38',
-            chainName: 'Binance Smart Chain',
-            nativeCurrency: {
-              name: 'BNB',
-              symbol: 'BNB',
-              decimals: 18
-            },
-            rpcUrls: ['https://bsc-dataseed.binance.org/'],
-            blockExplorerUrls: ['https://bscscan.com']
-          }]
-        });
+e.preventDefault();
 
-        // Agregar token CTF8 automáticamente
-        await window.ethereum.request({
-          method: 'wallet_watchAsset',
-          params: {
-            type: 'ERC20',
-            options: {
-              address: "0xE3f4110D74e51cBD51ca60317E54155c57855F20",
-              symbol: "CTF8",
-              decimals: 18,
-              image: "https://ctf8-kappa.vercel.app/img/logo.png"
-            }
-          }
-        });
+let codigo = document.getElementById("codigo").value;
+let wallet = document.getElementById("wallet").value;
 
-        document.getElementById("mensaje").innerText =
-          "MetaMask conectada correctamente: " + cuenta;
+if(codigo == "" || wallet == "") {
+  alert("Debes completar todos los campos");
+  return;
+}
 
-      } catch (error) {
-        console.log(error);
-        alert("Error al conectar con MetaMask");
-      }
-    }
+fetch("https://formspree.io/f/xzzvzwwq", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    codigo_billete: codigo,
+    wallet_usuario: wallet
+  })
+})
+.then(response => response.json())
+.then(data => {
 
-    function activarBillete() {
+  document.getElementById("mensaje").innerHTML =
+  "Solicitud enviada correctamente. Revisión en proceso.";
 
-      const codigo = document.getElementById("codigo").value;
+  document.getElementById("codigo").value = "";
+  document.getElementById("wallet").value = "";
 
-      if (!cuenta || !codigo) {
-        document.getElementById("mensaje").innerText =
-          "Conecta tu MetaMask e ingresa un código válido.";
-        return;
-      }
+})
+.catch(error => {
+  document.getElementById("mensaje").innerHTML =
+  "Error al enviar. Intenta nuevamente.";
+});
 
-      // Pasar datos al formulario oculto
-      document.getElementById("correoWallet").value = cuenta;
-      document.getElementById("correoCodigo").value = codigo;
+});
 
-      // Enviar correo con Formspree
-      document.getElementById("formCorreo").submit();
-
-      document.getElementById("mensaje").innerText =
-        "Billete activado y correo enviado para la wallet: " + cuenta;
-
-    }
-
-  </script>
+</script>
 
 </body>
 </html>
