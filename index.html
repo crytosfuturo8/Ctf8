@@ -21,24 +21,51 @@
     }
 
     .box {
-      background: rgba(30, 41, 59, 0.85);
-      padding: 20px;
+      background: rgba(30, 41, 59, 0.9);
+      padding: 25px;
       border-radius: 10px;
       margin: auto;
-      max-width: 400px;
+      max-width: 420px;
+      border: 2px solid #38bdf8;
     }
 
     input, button {
-      padding: 10px;
-      margin: 5px;
-      width: 80%;
+      padding: 12px;
+      margin: 8px;
+      width: 85%;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-metamask {
+      background: #f6851b;
+      color: white;
+    }
+
+    .btn-activar {
+      background: #10b981;
+      color: white;
     }
 
     a {
       color: #38bdf8;
       display: block;
-      margin-top: 20px;
+      margin-top: 15px;
+      text-decoration: none;
     }
+
+    #mensaje {
+      margin-top: 15px;
+      font-weight: bold;
+      word-break: break-all;
+    }
+
   </style>
 
 </head>
@@ -48,13 +75,17 @@
   <div class="box">
     <h2>🎫 Activar moneda CTF8</h2>
 
-    <p>Ingresa tu código y conecta tu wallet:</p>
+    <p>Ingresa tu código y conecta MetaMask:</p>
 
     <input type="text" id="codigo" placeholder="Código del billete"/><br/>
 
-    <button onclick="conectarWallet()">🔗 Conectar Wallet</button><br/>
+    <button class="btn-metamask" onclick="conectarWallet()">
+      🦊 Conectar con MetaMask (BSC)
+    </button><br/>
 
-    <button onclick="activarBillete()">✅ Activar</button>
+    <button class="btn-activar" onclick="activarBillete()">
+      ✅ Activar Billete CTF8
+    </button>
 
     <p id="mensaje"></p>
 
@@ -63,35 +94,82 @@
   </div>
 
   <script>
+
     let cuenta = "";
 
     async function conectarWallet() {
-      if (window.ethereum) {
-        const cuentas = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+      if (!window.ethereum) {
+        alert("Debes instalar MetaMask para usar CTF8");
+        window.open("https://metamask.io/download.html", "_blank");
+        return;
+      }
+
+      try {
+
+        // Conectar MetaMask
+        const cuentas = await window.ethereum.request({
+          method: 'eth_requestAccounts'
+        });
+
         cuenta = cuentas[0];
-        document.getElementById("mensaje").innerText = "Wallet conectada: " + cuenta;
-      } else {
-        alert("Instala MetaMask o usa Brave.");
+
+        // Forzar red Binance Smart Chain
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x38',
+            chainName: 'Binance Smart Chain',
+            nativeCurrency: {
+              name: 'BNB',
+              symbol: 'BNB',
+              decimals: 18
+            },
+            rpcUrls: ['https://bsc-dataseed.binance.org/'],
+            blockExplorerUrls: ['https://bscscan.com']
+          }]
+        });
+
+        // Agregar token CTF8 automáticamente
+        await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: "0xE3f4110D74e51cBD51ca60317E54155c57855F20",
+              symbol: "CTF8",
+              decimals: 18,
+              image: "https://ctf8-kappa.vercel.app/img/logo.png"
+            }
+          }
+        });
+
+        document.getElementById("mensaje").innerText =
+          "MetaMask conectada correctamente: " + cuenta;
+
+      } catch (error) {
+        console.log(error);
+        alert("Error al conectar con MetaMask");
       }
     }
 
     function activarBillete() {
+
       const codigo = document.getElementById("codigo").value;
 
       if (!cuenta || !codigo) {
-        document.getElementById("mensaje").innerText = "Conecta tu wallet e ingresa un código.";
+        document.getElementById("mensaje").innerText =
+          "Conecta tu MetaMask e ingresa un código válido.";
         return;
       }
 
-      fetch("https://formspree.io/f/xzzvzwwq", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ wallet: cuenta, codigo: codigo })
-      });
-
       document.getElementById("mensaje").innerText =
-        "✅ Activación registrada. En breve recibirás 28 CTF8.";
+        "Billete activado para la wallet: " + cuenta;
+
+      // Aquí después conectaremos con tu sistema de correos y base de datos
+
     }
+
   </script>
 
 </body>
