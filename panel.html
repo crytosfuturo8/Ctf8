@@ -1,61 +1,1072 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Panel de Usuario CTF8</title>
-  <style> body {
-    font-family: Arial;
-    background-image: url('img/file_000000008a8071f5b63d2554060b50ce.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    text-align: center;
-    padding: 20px;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  .box {
-    background: rgba(30, 41, 59, 0.85);
-    padding: 20px;
-    border-radius: 10px;
-    margin: auto;
-    max-width: 400px;
-  }
+<title>CTF8 | Contexto Global</title>
 
-  input, button {
-    padding: 10px;
-    margin: 5px;
-    width: 80%;
-  }
+<style>
 
-  a {
-    color: #38bdf8;
-    display: block;
-    margin-top: 20px;
-  }
-</style>
-  </style>
-</head>
-<body>
-  <div class="box">
-    <h2>👤 Panel del Usuario</h2>
-    <p>Enviar CTF8 a otra wallet:</p>
-    <input type="text" id="walletDestino" placeholder="Wallet destino"/><br/>
-    <input type="number" id="cantidad" placeholder="Cantidad de CTF8"/><br/>
-    <button onclick="enviar()">📤 Enviar</button>
-    
-  </div>
-  <script>
-    async function enviar() {
-      const destino = document.getElementById("walletDestino").value;
-      const cantidad = document.getElementById("cantidad").value;
-      document.getElementById("mensaje").innerText = "⚙️ Enviando... (simulado)";
-      setTimeout(() => {
-        document.getElementById("mensaje").innerText = "✅ Enviado correctamente (simulado)";
-      }, 1500);
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#071018;
+    color:#f1f5f9;
+}
+
+/* CABECERA */
+
+.header{
+    background:#0b1621;
+    border-bottom:1px solid #243544;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.subtitle{
+    color:#8496a5;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.live{
+    color:#22c55e;
+    font-size:12px;
+}
+
+/* CONTENEDOR */
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:18px;
+}
+
+/* BOTON VOLVER */
+
+.back{
+    display:inline-block;
+    color:#38bdf8;
+    text-decoration:none;
+    margin-bottom:15px;
+    font-size:13px;
+}
+
+/* TITULOS */
+
+.section-title{
+    margin:22px 0 12px;
+    font-size:18px;
+}
+
+/* TARJETAS PRINCIPALES */
+
+.market-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+}
+
+.card{
+    background:#0d1924;
+    border:1px solid #213343;
+    border-radius:9px;
+    padding:14px;
+}
+
+.card-name{
+    color:#8fa1af;
+    font-size:11px;
+}
+
+.card-value{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.card-change{
+    margin-top:5px;
+    font-size:12px;
+}
+
+.green{
+    color:#22c55e;
+}
+
+.red{
+    color:#ef4444;
+}
+
+.yellow{
+    color:#facc15;
+}
+
+.blue{
+    color:#38bdf8;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.panel{
+    background:#0d1924;
+    border:1px solid #213343;
+    border-radius:10px;
+    padding:16px;
+}
+
+.panel h2{
+    margin-top:0;
+    font-size:16px;
+}
+
+/* TABLAS */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    color:#7f92a2;
+    font-size:10px;
+    text-align:left;
+    padding:8px 4px;
+}
+
+td{
+    border-top:1px solid #1d2c39;
+    padding:10px 4px;
+    font-size:13px;
+}
+
+/* FLUJO */
+
+.flow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:11px 0;
+    border-bottom:1px solid #1d2c39;
+}
+
+.flow-name{
+    font-weight:bold;
+}
+
+.status{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.description{
+    color:#8395a4;
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* GEOPOLITICA */
+
+.geo{
+    padding:12px 0;
+    border-bottom:1px solid #1d2c39;
+}
+
+.geo strong{
+    font-size:13px;
+}
+
+.geo p{
+    color:#8496a5;
+    font-size:11px;
+    margin:5px 0 0;
+}
+
+/* RESUMEN */
+
+.summary{
+    line-height:1.7;
+    color:#b8c6d0;
+    font-size:13px;
+}
+
+.info{
+    background:#10283b;
+    border:1px solid #1d5d83;
+    border-radius:8px;
+    padding:12px;
+    margin-top:12px;
+    color:#a9dfff;
+    font-size:12px;
+}
+
+/* TRADINGVIEW */
+
+.chart{
+    margin-top:15px;
+    height:550px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* ALERTA */
+
+.warning{
+    text-align:center;
+    color:#647887;
+    font-size:11px;
+    padding:25px 10px;
+}
+
+/* MOVIL */
+
+@media(max-width:1100px){
+
+    .market-grid{
+        grid-template-columns:repeat(3,1fr);
     }
-  </script>
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .header{
+        align-items:flex-start;
+    }
+
+    .market-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .card-value{
+        font-size:17px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CABECERA -->
+
+<header class="header">
+
+    <div>
+        <div class="logo">🌎 <span>CTF8</span> GLOBAL</div>
+        <div class="subtitle">
+            Panel de contexto mundial y flujo de capital
+        </div>
+    </div>
+
+    <div class="live">
+        ● PANEL ACTIVO
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<a class="back" href="index.html">
+    ← Volver a CTF8
+</a>
+
+
+<!-- ESTADO GLOBAL -->
+
+<h2 class="section-title">
+    🌎 Estado global de los mercados
+</h2>
+
+
+<div class="market-grid">
+
+    <div class="card">
+        <div class="card-name">DXY</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-name">US 10Y</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-name">REAL YIELD</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-name">VIX</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-name">S&P 500</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-name">NASDAQ</div>
+        <div class="card-value">--</div>
+        <div class="card-change yellow">
+            Esperando datos
+        </div>
+    </div>
+
+</div>
+
+
+<!-- FLUJO / ACCIONES / FOREX -->
+
+<section class="grid" style="margin-top:15px;">
+
+
+<!-- FLUJO -->
+
+<div class="panel">
+
+<h2>💰 Flujo observado</h2>
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">USD</div>
+        <div class="description">
+            Fuerza relativa del dólar
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">BONOS</div>
+        <div class="description">
+            Precios y rendimientos
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">ACCIONES</div>
+        <div class="description">
+            Índices y sectores
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">ENERGÍA</div>
+        <div class="description">
+            Petróleo y gas
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">METALES</div>
+        <div class="description">
+            Oro, plata y cobre
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+
+<div class="flow">
+
+    <div>
+        <div class="flow-name">CRIPTO</div>
+        <div class="description">
+            Bitcoin y mercado cripto
+        </div>
+    </div>
+
+    <div class="status yellow">
+        🟡 ESPERANDO
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- ACCIONES -->
+
+<div class="panel">
+
+<h2>📈 Índices mundiales</h2>
+
+<table>
+
+<tr>
+<th>ÍNDICE</th>
+<th>PRECIO</th>
+<th>VAR.</th>
+</tr>
+
+<tr>
+<td>🇺🇸 S&P 500</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇺🇸 Nasdaq 100</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇺🇸 Dow Jones</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇺🇸 Russell 2000</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇩🇪 DAX</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇯🇵 Nikkei</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇭🇰 Hang Seng</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇨🇳 Shanghai</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- FOREX -->
+
+<div class="panel">
+
+<h2>💱 Forex</h2>
+
+<table>
+
+<tr>
+<th>PAR</th>
+<th>PRECIO</th>
+<th>VAR.</th>
+</tr>
+
+<tr>
+<td>EUR/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>GBP/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>USD/JPY</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>USD/CHF</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>USD/CAD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>AUD/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>NZD/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>USD/CLP</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- MATERIAS / CRIPTO / BONOS -->
+
+<section class="grid" style="margin-top:15px;">
+
+
+<!-- MATERIAS PRIMAS -->
+
+<div class="panel">
+
+<h2>🛢️ Materias primas</h2>
+
+<table>
+
+<tr>
+<td>🥇 Oro XAU/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🥈 Plata XAG/USD</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🛢️ WTI</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🛢️ Brent</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🔶 Cobre</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🔥 Gas natural</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- BONOS -->
+
+<div class="panel">
+
+<h2>🏦 Bonos y rendimientos</h2>
+
+<table>
+
+<tr>
+<td>🇺🇸 US 2Y</td>
+<td>--</td>
+</tr>
+
+<tr>
+<td>🇺🇸 US 10Y</td>
+<td>--</td>
+</tr>
+
+<tr>
+<td>🇺🇸 US 30Y</td>
+<td>--</td>
+</tr>
+
+<tr>
+<td>🇩🇪 Alemania 10Y</td>
+<td>--</td>
+</tr>
+
+<tr>
+<td>🇯🇵 Japón 10Y</td>
+<td>--</td>
+</tr>
+
+<tr>
+<td>📊 Curva 2Y–10Y</td>
+<td>--</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- CRIPTO -->
+
+<div class="panel">
+
+<h2>₿ Cripto</h2>
+
+<table>
+
+<tr>
+<td>Bitcoin</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>Ethereum</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>BTC Dominance</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+<tr>
+<td>Total Market Cap</td>
+<td>--</td>
+<td class="yellow">--</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- GEOPOLITICA / CALENDARIO / CONTEXTO -->
+
+<section class="grid" style="margin-top:15px;">
+
+
+<!-- GEOPOLITICA -->
+
+<div class="panel">
+
+<h2>🌍 Geopolítica mundial</h2>
+
+<div class="geo">
+
+<strong>🇺🇸 EE.UU. / China</strong>
+
+<p>
+Comercio, tecnología y cadenas de suministro.
+</p>
+
+</div>
+
+
+<div class="geo">
+
+<strong>🇨🇳 China / Taiwán</strong>
+
+<p>
+Riesgo comercial, tecnológico y marítimo.
+</p>
+
+</div>
+
+
+<div class="geo">
+
+<strong>🇮🇷 Oriente Medio</strong>
+
+<p>
+Energía, petróleo y transporte marítimo.
+</p>
+
+</div>
+
+
+<div class="geo">
+
+<strong>🇷🇺 Rusia / Ucrania</strong>
+
+<p>
+Riesgo energético y geopolítico.
+</p>
+
+</div>
+
+
+<div class="geo">
+
+<strong>🚢 Rutas marítimas</strong>
+
+<p>
+Ormuz, Mar Rojo y comercio internacional.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- CALENDARIO -->
+
+<div class="panel">
+
+<h2>📅 Calendario económico</h2>
+
+<table>
+
+<tr>
+<th>HORA</th>
+<th>PAÍS</th>
+<th>EVENTO</th>
+</tr>
+
+<tr>
+<td>--</td>
+<td>🇺🇸</td>
+<td>Inflación</td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>🇺🇸</td>
+<td>Empleo</td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>🇪🇺</td>
+<td>Datos económicos</td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>🇨🇳</td>
+<td>Datos China</td>
+</tr>
+
+<tr>
+<td>--</td>
+<td>🇯🇵</td>
+<td>Datos Japón</td>
+</tr>
+
+</table>
+
+<div class="info">
+El calendario real se conectará en la siguiente etapa.
+</div>
+
+</div>
+
+
+<!-- CONTEXTO -->
+
+<div class="panel">
+
+<h2>🧠 Contexto global</h2>
+
+<div class="summary">
+
+<p>
+Aquí se analizará la relación entre los diferentes mercados.
+</p>
+
+<p>
+El sistema observará:
+</p>
+
+<p>
+💵 Dólar<br>
+🏦 Bonos y rendimientos<br>
+📈 Acciones<br>
+💱 Divisas<br>
+🛢️ Materias primas<br>
+₿ Cripto<br>
+⚠️ Volatilidad<br>
+🌍 Geopolítica
+</p>
+
+<p>
+El objetivo es identificar cambios en el comportamiento
+relativo de los activos y posibles desplazamientos de capital.
+</p>
+
+</div>
+
+<div class="info">
+
+📊 INFORMACIÓN DE CONTEXTO<br><br>
+
+No genera señales de compra o venta.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GRAFICO TRADINGVIEW -->
+
+<h2 class="section-title">
+📊 Visión general del mercado
+</h2>
+
+<div class="panel chart">
+
+<div class="tradingview-widget-container"
+style="height:100%;width:100%">
+
+<div
+class="tradingview-widget-container__widget"
+style="height:100%;width:100%">
+</div>
+
+<script
+type="text/javascript"
+src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js"
+async>
+
+{
+"colorTheme":"dark",
+"dateRange":"1D",
+"showChart":true,
+"locale":"es",
+"isTransparent":true,
+"width":"100%",
+"height":"100%",
+
+"tabs":[
+
+{
+"title":"Índices",
+"symbols":[
+{"s":"SP:SPX","d":"S&P 500"},
+{"s":"NASDAQ:NDX","d":"Nasdaq 100"},
+{"s":"TVC:DJI","d":"Dow Jones"},
+{"s":"TVC:RUT","d":"Russell 2000"},
+{"s":"XETR:DAX","d":"DAX"},
+{"s":"TVC:NI225","d":"Nikkei"}
+]
+},
+
+{
+"title":"Forex",
+"symbols":[
+{"s":"FX:EURUSD","d":"EUR/USD"},
+{"s":"FX:GBPUSD","d":"GBP/USD"},
+{"s":"FX:USDJPY","d":"USD/JPY"},
+{"s":"FX:USDCHF","d":"USD/CHF"},
+{"s":"FX:AUDUSD","d":"AUD/USD"},
+{"s":"FX:USDCAD","d":"USD/CAD"}
+]
+},
+
+{
+"title":"Materias primas",
+"symbols":[
+{"s":"OANDA:XAUUSD","d":"Oro"},
+{"s":"OANDA:XAGUSD","d":"Plata"},
+{"s":"TVC:USOIL","d":"WTI"},
+{"s":"TVC:UKOIL","d":"Brent"},
+{"s":"COMEX:HG1!","d":"Cobre"}
+]
+},
+
+{
+"title":"Cripto",
+"symbols":[
+{"s":"COINBASE:BTCUSD","d":"Bitcoin"},
+{"s":"COINBASE:ETHUSD","d":"Ethereum"}
+]
+}
+
+]
+
+}
+
+</script>
+
+</div>
+
+</div>
+
+
+<div class="warning">
+
+⚠️ CTF8 GLOBAL — Panel informativo.<br>
+Los datos y análisis posteriores serán utilizados para estudiar
+el contexto y el flujo de capital. No genera órdenes automáticas.
+
+</div>
+
+
+</main>
+
+
+<script>
+
+/*
+===========================================
+CTF8 GLOBAL
+===========================================
+
+Esta primera versión contiene:
+
+✓ Panel global
+✓ Acciones
+✓ Índices
+✓ Forex
+✓ Materias primas
+✓ Bonos
+✓ Cripto
+✓ Geopolítica
+✓ Calendario
+✓ Flujo observado
+✓ TradingView
+✓ Diseño móvil
+
+SIGUIENTE ETAPA:
+
+→ Datos reales
+→ Actualización automática
+→ Noticias
+→ Calendario económico real
+→ Motor de análisis del flujo
+→ Telegram
+
+===========================================
+*/
+
+
+function reloj(){
+
+    const ahora = new Date();
+
+    document.title =
+        "CTF8 | Global | " +
+        ahora.toLocaleTimeString("es-CL");
+
+}
+
+setInterval(reloj,1000);
+
+reloj();
+
+</script>
+
 </body>
 </html>
