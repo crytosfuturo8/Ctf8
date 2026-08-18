@@ -19,8 +19,6 @@ body{
     color:#f1f5f9;
 }
 
-/* CABECERA */
-
 .header{
     background:#0b1621;
     border-bottom:1px solid #243544;
@@ -53,15 +51,11 @@ body{
     font-size:12px;
 }
 
-/* CONTENEDOR */
-
 .container{
     max-width:1500px;
     margin:auto;
     padding:18px;
 }
-
-/* BOTON VOLVER */
 
 .back{
     display:inline-block;
@@ -71,14 +65,10 @@ body{
     font-size:13px;
 }
 
-/* TITULOS */
-
 .section-title{
     margin:22px 0 12px;
     font-size:18px;
 }
-
-/* TARJETAS PRINCIPALES */
 
 .market-grid{
     display:grid;
@@ -125,8 +115,6 @@ body{
     color:#38bdf8;
 }
 
-/* GRID */
-
 .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -145,8 +133,6 @@ body{
     font-size:16px;
 }
 
-/* TABLAS */
-
 table{
     width:100%;
     border-collapse:collapse;
@@ -164,8 +150,6 @@ td{
     padding:10px 4px;
     font-size:13px;
 }
-
-/* FLUJO */
 
 .flow{
     display:flex;
@@ -190,8 +174,6 @@ td{
     margin-top:4px;
 }
 
-/* GEOPOLITICA */
-
 .geo{
     padding:12px 0;
     border-bottom:1px solid #1d2c39;
@@ -206,8 +188,6 @@ td{
     font-size:11px;
     margin:5px 0 0;
 }
-
-/* RESUMEN */
 
 .summary{
     line-height:1.7;
@@ -225,16 +205,12 @@ td{
     font-size:12px;
 }
 
-/* TRADINGVIEW */
-
 .chart{
     margin-top:15px;
     height:550px;
     border-radius:10px;
     overflow:hidden;
 }
-
-/* ALERTA */
 
 .warning{
     text-align:center;
@@ -243,7 +219,11 @@ td{
     padding:25px 10px;
 }
 
-/* MOVIL */
+.api-status{
+    margin-top:8px;
+    font-size:10px;
+    color:#8496a5;
+}
 
 @media(max-width:1100px){
 
@@ -285,15 +265,15 @@ td{
 
 <body>
 
-<!-- CABECERA -->
-
 <header class="header">
 
     <div>
         <div class="logo">🌎 <span>CTF8</span> GLOBAL</div>
+
         <div class="subtitle">
             Panel de contexto mundial y flujo de capital
         </div>
+
     </div>
 
     <div class="live">
@@ -309,8 +289,6 @@ td{
     ← Volver a CTF8
 </a>
 
-
-<!-- ESTADO GLOBAL -->
 
 <h2 class="section-title">
     🌎 Estado global de los mercados
@@ -370,12 +348,8 @@ td{
 </div>
 
 
-<!-- FLUJO / ACCIONES / FOREX -->
-
 <section class="grid" style="margin-top:15px;">
 
-
-<!-- FLUJO -->
 
 <div class="panel">
 
@@ -479,8 +453,6 @@ td{
 </div>
 
 
-<!-- ACCIONES -->
-
 <div class="panel">
 
 <h2>📈 Índices mundiales</h2>
@@ -546,8 +518,6 @@ td{
 </div>
 
 
-<!-- FOREX -->
-
 <div class="panel">
 
 <h2>💱 Forex</h2>
@@ -562,8 +532,8 @@ td{
 
 <tr>
 <td>EUR/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="eurusd-price">--</td>
+<td id="eurusd-change" class="yellow">--</td>
 </tr>
 
 <tr>
@@ -610,17 +580,17 @@ td{
 
 </table>
 
+<div id="api-status" class="api-status">
+    🟡 Conectando con CTF8 API...
+</div>
+
 </div>
 
 </section>
 
 
-<!-- MATERIAS / CRIPTO / BONOS -->
-
 <section class="grid" style="margin-top:15px;">
 
-
-<!-- MATERIAS PRIMAS -->
 
 <div class="panel">
 
@@ -669,8 +639,6 @@ td{
 </div>
 
 
-<!-- BONOS -->
-
 <div class="panel">
 
 <h2>🏦 Bonos y rendimientos</h2>
@@ -712,8 +680,6 @@ td{
 </div>
 
 
-<!-- CRIPTO -->
-
 <div class="panel">
 
 <h2>₿ Cripto</h2>
@@ -751,12 +717,8 @@ td{
 </section>
 
 
-<!-- GEOPOLITICA / CALENDARIO / CONTEXTO -->
-
 <section class="grid" style="margin-top:15px;">
 
-
-<!-- GEOPOLITICA -->
 
 <div class="panel">
 
@@ -772,7 +734,6 @@ Comercio, tecnología y cadenas de suministro.
 
 </div>
 
-
 <div class="geo">
 
 <strong>🇨🇳 China / Taiwán</strong>
@@ -782,7 +743,6 @@ Riesgo comercial, tecnológico y marítimo.
 </p>
 
 </div>
-
 
 <div class="geo">
 
@@ -794,7 +754,6 @@ Energía, petróleo y transporte marítimo.
 
 </div>
 
-
 <div class="geo">
 
 <strong>🇷🇺 Rusia / Ucrania</strong>
@@ -804,7 +763,6 @@ Riesgo energético y geopolítico.
 </p>
 
 </div>
-
 
 <div class="geo">
 
@@ -818,8 +776,6 @@ Ormuz, Mar Rojo y comercio internacional.
 
 </div>
 
-
-<!-- CALENDARIO -->
 
 <div class="panel">
 
@@ -872,8 +828,6 @@ El calendario real se conectará en la siguiente etapa.
 </div>
 
 
-<!-- CONTEXTO -->
-
 <div class="panel">
 
 <h2>🧠 Contexto global</h2>
@@ -918,8 +872,6 @@ No genera señales de compra o venta.
 
 </section>
 
-
-<!-- GRAFICO TRADINGVIEW -->
 
 <h2 class="section-title">
 📊 Visión general del mercado
@@ -1024,33 +976,35 @@ el contexto y el flujo de capital. No genera órdenes automáticas.
 CTF8 GLOBAL
 ===========================================
 
-Esta primera versión contiene:
+ETAPA 1:
 
 ✓ Panel global
-✓ Acciones
-✓ Índices
-✓ Forex
-✓ Materias primas
-✓ Bonos
-✓ Cripto
-✓ Geopolítica
-✓ Calendario
-✓ Flujo observado
+✓ Diseño original
 ✓ TradingView
-✓ Diseño móvil
+✓ Servidor CTF8
+✓ Twelve Data
+✓ EUR/USD en tiempo real
+✓ Actualización automática
 
-SIGUIENTE ETAPA:
+SIGUIENTE:
 
-→ Datos reales
-→ Actualización automática
+→ Más pares Forex
+→ Oro y plata
+→ Cripto
+→ Índices
+→ VIX
+→ Bonos
 → Noticias
-→ Calendario económico real
-→ Motor de análisis del flujo
-→ Telegram
+→ Calendario económico
+→ Motor de flujo CTF8
 
 ===========================================
 */
 
+
+// ===========================================
+// RELOJ
+// ===========================================
 
 function reloj(){
 
@@ -1065,6 +1019,153 @@ function reloj(){
 setInterval(reloj,1000);
 
 reloj();
+
+
+// ===========================================
+// CTF8 API
+// ===========================================
+
+const CTF8_API = "http://localhost:3000";
+
+
+// ===========================================
+// OBTENER DATOS DE TWELVE DATA
+// ===========================================
+
+async function obtenerDatos(symbol){
+
+    try{
+
+        const respuesta = await fetch(
+            `${CTF8_API}/api/quote?symbol=${encodeURIComponent(symbol)}`
+        );
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "HTTP " + respuesta.status
+            );
+
+        }
+
+        const datos = await respuesta.json();
+
+        if(datos.status === "error"){
+
+            throw new Error(
+                datos.message || "Error Twelve Data"
+            );
+
+        }
+
+        return datos;
+
+    }catch(error){
+
+        console.error(
+            "CTF8 API:",
+            error.message
+        );
+
+        return null;
+    }
+
+}
+
+
+// ===========================================
+// ACTUALIZAR EUR/USD
+// ===========================================
+
+async function actualizarEURUSD(){
+
+    const datos = await obtenerDatos("EUR/USD");
+
+    const precio =
+        document.getElementById("eurusd-price");
+
+    const cambio =
+        document.getElementById("eurusd-change");
+
+    const estado =
+        document.getElementById("api-status");
+
+
+    if(!datos){
+
+        precio.textContent = "--";
+
+        cambio.textContent = "Sin conexión";
+
+        cambio.className = "yellow";
+
+        estado.textContent =
+            "🔴 CTF8 API sin conexión";
+
+        return;
+    }
+
+
+    // PRECIO
+
+    precio.textContent =
+        Number(datos.close).toFixed(5);
+
+
+    // VARIACIÓN
+
+    const porcentaje =
+        Number(datos.percent_change);
+
+
+    cambio.textContent =
+        (porcentaje >= 0 ? "+" : "") +
+        porcentaje.toFixed(4) +
+        "%";
+
+
+    // COLOR
+
+    if(porcentaje > 0){
+
+        cambio.className = "green";
+
+    }else if(porcentaje < 0){
+
+        cambio.className = "red";
+
+    }else{
+
+        cambio.className = "yellow";
+
+    }
+
+
+    // ESTADO
+
+    estado.textContent =
+        "🟢 CTF8 API conectada · Twelve Data · " +
+        new Date().toLocaleTimeString("es-CL");
+
+}
+
+
+// ===========================================
+// PRIMERA CARGA
+// ===========================================
+
+actualizarEURUSD();
+
+
+// ===========================================
+// ACTUALIZACIÓN CADA 60 SEGUNDOS
+// ===========================================
+
+setInterval(
+    actualizarEURUSD,
+    60000
+);
+
 
 </script>
 
