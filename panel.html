@@ -100,19 +100,19 @@ body{
 }
 
 .green{
-    color:#22c55e;
+    color:#22c55e !important;
 }
 
 .red{
-    color:#ef4444;
+    color:#ef4444 !important;
 }
 
 .yellow{
-    color:#facc15;
+    color:#facc15 !important;
 }
 
 .blue{
-    color:#38bdf8;
+    color:#38bdf8 !important;
 }
 
 .grid{
@@ -220,9 +220,15 @@ td{
 }
 
 .api-status{
-    margin-top:8px;
+    margin-top:10px;
     font-size:10px;
     color:#8496a5;
+}
+
+.update-time{
+    color:#647887;
+    font-size:10px;
+    margin-top:5px;
 }
 
 @media(max-width:1100px){
@@ -268,7 +274,10 @@ td{
 <header class="header">
 
     <div>
-        <div class="logo">🌎 <span>CTF8</span> GLOBAL</div>
+
+        <div class="logo">
+            🌎 <span>CTF8</span> GLOBAL
+        </div>
 
         <div class="subtitle">
             Panel de contexto mundial y flujo de capital
@@ -290,57 +299,60 @@ td{
 </a>
 
 
+<!-- =====================================================
+     ESTADO GLOBAL
+===================================================== -->
+
 <h2 class="section-title">
     🌎 Estado global de los mercados
 </h2>
-
 
 <div class="market-grid">
 
     <div class="card">
         <div class="card-name">DXY</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
+        <div id="dxy-price" class="card-value">--</div>
+        <div id="dxy-change" class="card-change yellow">
             Esperando datos
         </div>
     </div>
 
     <div class="card">
         <div class="card-name">US 10Y</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
+        <div id="us10y-top-price" class="card-value">--</div>
+        <div id="us10y-top-change" class="card-change yellow">
             Esperando datos
         </div>
     </div>
 
     <div class="card">
         <div class="card-name">REAL YIELD</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
-            Esperando datos
+        <div id="real-yield-price" class="card-value">--</div>
+        <div id="real-yield-change" class="card-change yellow">
+            N/D
         </div>
     </div>
 
     <div class="card">
         <div class="card-name">VIX</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
+        <div id="vix-price" class="card-value">--</div>
+        <div id="vix-change" class="card-change yellow">
             Esperando datos
         </div>
     </div>
 
     <div class="card">
         <div class="card-name">S&P 500</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
+        <div id="spx-top-price" class="card-value">--</div>
+        <div id="spx-top-change" class="card-change yellow">
             Esperando datos
         </div>
     </div>
 
     <div class="card">
         <div class="card-name">NASDAQ</div>
-        <div class="card-value">--</div>
-        <div class="card-change yellow">
+        <div id="ndx-top-price" class="card-value">--</div>
+        <div id="ndx-top-change" class="card-change yellow">
             Esperando datos
         </div>
     </div>
@@ -348,8 +360,14 @@ td{
 </div>
 
 
+<!-- =====================================================
+     FLUJO / INDICES / FOREX
+===================================================== -->
+
 <section class="grid" style="margin-top:15px;">
 
+
+<!-- FLUJO -->
 
 <div class="panel">
 
@@ -357,101 +375,103 @@ td{
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">USD</div>
-        <div class="description">
-            Fuerza relativa del dólar
-        </div>
-    </div>
+<div>
+<div class="flow-name">USD</div>
+<div class="description">
+Fuerza relativa del dólar
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
+<div id="flow-usd" class="status yellow">
+🟡 ESPERANDO
+</div>
 
 </div>
 
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">BONOS</div>
-        <div class="description">
-            Precios y rendimientos
-        </div>
-    </div>
+<div>
+<div class="flow-name">BONOS</div>
+<div class="description">
+Rendimientos y movimiento de deuda
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
+<div id="flow-bonds" class="status yellow">
+🟡 ESPERANDO
+</div>
 
 </div>
 
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">ACCIONES</div>
-        <div class="description">
-            Índices y sectores
-        </div>
-    </div>
+<div>
+<div class="flow-name">ACCIONES</div>
+<div class="description">
+Índices mundiales
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
+<div id="flow-stocks" class="status yellow">
+🟡 ESPERANDO
+</div>
 
 </div>
 
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">ENERGÍA</div>
-        <div class="description">
-            Petróleo y gas
-        </div>
-    </div>
+<div>
+<div class="flow-name">ENERGÍA</div>
+<div class="description">
+Petróleo y gas
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
+<div id="flow-energy" class="status yellow">
+🟡 ESPERANDO
+</div>
 
 </div>
 
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">METALES</div>
-        <div class="description">
-            Oro, plata y cobre
-        </div>
-    </div>
+<div>
+<div class="flow-name">METALES</div>
+<div class="description">
+Oro, plata y cobre
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
+<div id="flow-metals" class="status yellow">
+🟡 ESPERANDO
+</div>
 
 </div>
 
 
 <div class="flow">
 
-    <div>
-        <div class="flow-name">CRIPTO</div>
-        <div class="description">
-            Bitcoin y mercado cripto
-        </div>
-    </div>
+<div>
+<div class="flow-name">CRIPTO</div>
+<div class="description">
+Bitcoin y Ethereum
+</div>
+</div>
 
-    <div class="status yellow">
-        🟡 ESPERANDO
-    </div>
-
+<div id="flow-crypto" class="status yellow">
+🟡 ESPERANDO
 </div>
 
 </div>
 
+</div>
+
+
+<!-- INDICES -->
 
 <div class="panel">
 
@@ -467,56 +487,64 @@ td{
 
 <tr>
 <td>🇺🇸 S&P 500</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="spx-price">--</td>
+<td id="spx-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇺🇸 Nasdaq 100</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="ndx-price">--</td>
+<td id="ndx-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇺🇸 Dow Jones</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="dji-price">--</td>
+<td id="dji-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇺🇸 Russell 2000</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="rut-price">--</td>
+<td id="rut-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇩🇪 DAX</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="dax-price">--</td>
+<td id="dax-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇯🇵 Nikkei</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="nikkei-price">--</td>
+<td id="nikkei-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇭🇰 Hang Seng</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="hsi-price">--</td>
+<td id="hsi-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇨🇳 Shanghai</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="shanghai-price">--</td>
+<td id="shanghai-change" class="yellow">--</td>
+</tr>
+
+<tr>
+<td>🇦🇺 Australia</td>
+<td id="australia-price">--</td>
+<td id="australia-change" class="yellow">--</td>
 </tr>
 
 </table>
 
 </div>
 
+
+<!-- FOREX -->
 
 <div class="panel">
 
@@ -538,59 +566,61 @@ td{
 
 <tr>
 <td>GBP/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="gbpusd-price">--</td>
+<td id="gbpusd-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>USD/JPY</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="usdjpy-price">--</td>
+<td id="usdjpy-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>USD/CHF</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="usdchf-price">--</td>
+<td id="usdchf-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>USD/CAD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="usdcad-price">--</td>
+<td id="usdcad-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>AUD/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="audusd-price">--</td>
+<td id="audusd-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>NZD/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="nzdusd-price">--</td>
+<td id="nzdusd-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>USD/CLP</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="usdclp-price">--</td>
+<td id="usdclp-change" class="yellow">--</td>
 </tr>
 
 </table>
-
-<div id="api-status" class="api-status">
-    🟡 Conectando con CTF8 API...
-</div>
 
 </div>
 
 </section>
 
 
+<!-- =====================================================
+     MATERIAS / BONOS / CRIPTO
+===================================================== -->
+
 <section class="grid" style="margin-top:15px;">
 
+
+<!-- MATERIAS -->
 
 <div class="panel">
 
@@ -599,45 +629,53 @@ td{
 <table>
 
 <tr>
+<th>ACTIVO</th>
+<th>PRECIO</th>
+<th>VAR.</th>
+</tr>
+
+<tr>
 <td>🥇 Oro XAU/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="gold-price">--</td>
+<td id="gold-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🥈 Plata XAG/USD</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="silver-price">--</td>
+<td id="silver-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🛢️ WTI</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="wti-price">--</td>
+<td id="wti-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🛢️ Brent</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="brent-price">--</td>
+<td id="brent-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🔶 Cobre</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="copper-price">--</td>
+<td id="copper-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🔥 Gas natural</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="gas-price">--</td>
+<td id="gas-change" class="yellow">--</td>
 </tr>
 
 </table>
 
 </div>
 
+
+<!-- BONOS -->
 
 <div class="panel">
 
@@ -646,39 +684,58 @@ td{
 <table>
 
 <tr>
+<th>BONO</th>
+<th>REND.</th>
+<th>VAR.</th>
+</tr>
+
+<tr>
 <td>🇺🇸 US 2Y</td>
-<td>--</td>
+<td id="us2y-price">--</td>
+<td id="us2y-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇺🇸 US 10Y</td>
-<td>--</td>
+<td id="us10y-price">--</td>
+<td id="us10y-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇺🇸 US 30Y</td>
-<td>--</td>
+<td id="us30y-price">--</td>
+<td id="us30y-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇩🇪 Alemania 10Y</td>
-<td>--</td>
+<td id="de10y-price">--</td>
+<td id="de10y-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>🇯🇵 Japón 10Y</td>
-<td>--</td>
+<td id="jp10y-price">--</td>
+<td id="jp10y-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>📊 Curva 2Y–10Y</td>
-<td>--</td>
+<td id="curve-price">--</td>
+<td id="curve-status" class="yellow">--</td>
 </tr>
 
 </table>
 
+<div class="info">
+Los bonos muestran rendimiento (%). Para la curva:
+US 10Y − US 2Y.
 </div>
 
+</div>
+
+
+<!-- CRIPTO -->
 
 <div class="panel">
 
@@ -687,27 +744,33 @@ td{
 <table>
 
 <tr>
+<th>ACTIVO</th>
+<th>PRECIO</th>
+<th>VAR.</th>
+</tr>
+
+<tr>
 <td>Bitcoin</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="btc-price">--</td>
+<td id="btc-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>Ethereum</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="eth-price">--</td>
+<td id="eth-change" class="yellow">--</td>
 </tr>
 
 <tr>
 <td>BTC Dominance</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="btcdom-price">--</td>
+<td id="btcdom-change" class="yellow">N/D</td>
 </tr>
 
 <tr>
 <td>Total Market Cap</td>
-<td>--</td>
-<td class="yellow">--</td>
+<td id="totalcap-price">--</td>
+<td id="totalcap-change" class="yellow">N/D</td>
 </tr>
 
 </table>
@@ -716,6 +779,10 @@ td{
 
 </section>
 
+
+<!-- =====================================================
+     GEOPOLITICA / CALENDARIO / CONTEXTO
+===================================================== -->
 
 <section class="grid" style="margin-top:15px;">
 
@@ -822,7 +889,7 @@ Ormuz, Mar Rojo y comercio internacional.
 </table>
 
 <div class="info">
-El calendario real se conectará en la siguiente etapa.
+Calendario económico: próxima etapa.
 </div>
 
 </div>
@@ -835,11 +902,7 @@ El calendario real se conectará en la siguiente etapa.
 <div class="summary">
 
 <p>
-Aquí se analizará la relación entre los diferentes mercados.
-</p>
-
-<p>
-El sistema observará:
+El sistema observa la relación entre los diferentes mercados.
 </p>
 
 <p>
@@ -854,8 +917,8 @@ El sistema observará:
 </p>
 
 <p>
-El objetivo es identificar cambios en el comportamiento
-relativo de los activos y posibles desplazamientos de capital.
+El objetivo es identificar cambios relativos entre activos
+y posibles desplazamientos de capital.
 </p>
 
 </div>
@@ -864,7 +927,7 @@ relativo de los activos y posibles desplazamientos de capital.
 
 📊 INFORMACIÓN DE CONTEXTO<br><br>
 
-No genera señales de compra o venta.
+No genera señales automáticas de compra o venta.
 
 </div>
 
@@ -872,6 +935,10 @@ No genera señales de compra o venta.
 
 </section>
 
+
+<!-- =====================================================
+     TRADINGVIEW
+===================================================== -->
 
 <h2 class="section-title">
 📊 Visión general del mercado
@@ -911,7 +978,8 @@ async>
 {"s":"TVC:DJI","d":"Dow Jones"},
 {"s":"TVC:RUT","d":"Russell 2000"},
 {"s":"XETR:DAX","d":"DAX"},
-{"s":"TVC:NI225","d":"Nikkei"}
+{"s":"TVC:NI225","d":"Nikkei"},
+{"s":"TVC:HSI","d":"Hang Seng"}
 ]
 },
 
@@ -960,8 +1028,8 @@ async>
 <div class="warning">
 
 ⚠️ CTF8 GLOBAL — Panel informativo.<br>
-Los datos y análisis posteriores serán utilizados para estudiar
-el contexto y el flujo de capital. No genera órdenes automáticas.
+Datos obtenidos mediante el servidor CTF8 y Twelve Data.<br>
+No genera órdenes automáticas.
 
 </div>
 
@@ -971,40 +1039,17 @@ el contexto y el flujo de capital. No genera órdenes automáticas.
 
 <script>
 
-/*
-===========================================
-CTF8 GLOBAL
-===========================================
+/* =====================================================
+   CTF8 GLOBAL
+   SERVIDOR LOCAL TERMUX
+===================================================== */
 
-ETAPA 1:
-
-✓ Panel global
-✓ Diseño original
-✓ TradingView
-✓ Servidor CTF8
-✓ Twelve Data
-✓ EUR/USD en tiempo real
-✓ Actualización automática
-
-SIGUIENTE:
-
-→ Más pares Forex
-→ Oro y plata
-→ Cripto
-→ Índices
-→ VIX
-→ Bonos
-→ Noticias
-→ Calendario económico
-→ Motor de flujo CTF8
-
-===========================================
-*/
+const CTF8_API = "http://localhost:3000";
 
 
-// ===========================================
-// RELOJ
-// ===========================================
+/* =====================================================
+   RELOJ
+===================================================== */
 
 function reloj(){
 
@@ -1021,16 +1066,9 @@ setInterval(reloj,1000);
 reloj();
 
 
-// ===========================================
-// CTF8 API
-// ===========================================
-
-const CTF8_API = "http://localhost:3000";
-
-
-// ===========================================
-// OBTENER DATOS DE TWELVE DATA
-// ===========================================
+/* =====================================================
+   FUNCIÓN PRINCIPAL API
+===================================================== */
 
 async function obtenerDatos(symbol){
 
@@ -1064,108 +1102,581 @@ async function obtenerDatos(symbol){
 
         console.error(
             "CTF8 API:",
+            symbol,
             error.message
         );
 
         return null;
     }
-
 }
 
 
-// ===========================================
-// ACTUALIZAR EUR/USD
-// ===========================================
+/* =====================================================
+   ACTUALIZAR FILA
+===================================================== */
 
-async function actualizarEURUSD(){
-
-    const datos = await obtenerDatos("EUR/USD");
+function colocarDatos(
+    id,
+    datos,
+    decimales = 5
+){
 
     const precio =
-        document.getElementById("eurusd-price");
+        document.getElementById(id + "-price");
 
     const cambio =
-        document.getElementById("eurusd-change");
-
-    const estado =
-        document.getElementById("api-status");
+        document.getElementById(id + "-change");
 
 
-    if(!datos){
+    if(!precio || !cambio){
+        return;
+    }
 
-        precio.textContent = "--";
 
-        cambio.textContent = "Sin conexión";
+    if(!datos || !datos.close){
+
+        precio.textContent = "N/D";
+
+        cambio.textContent = "N/D";
 
         cambio.className = "yellow";
-
-        estado.textContent =
-            "🔴 CTF8 API sin conexión";
 
         return;
     }
 
 
-    // PRECIO
+    const valor =
+        Number(datos.close);
+
 
     precio.textContent =
-        Number(datos.close).toFixed(5);
+        isNaN(valor)
+        ? datos.close
+        : valor.toFixed(decimales);
 
 
-    // VARIACIÓN
+    if(datos.percent_change !== undefined){
 
-    const porcentaje =
-        Number(datos.percent_change);
-
-
-    cambio.textContent =
-        (porcentaje >= 0 ? "+" : "") +
-        porcentaje.toFixed(4) +
-        "%";
+        const porcentaje =
+            Number(datos.percent_change);
 
 
-    // COLOR
+        if(!isNaN(porcentaje)){
 
-    if(porcentaje > 0){
+            cambio.textContent =
+                (porcentaje >= 0 ? "+" : "") +
+                porcentaje.toFixed(4) +
+                "%";
 
-        cambio.className = "green";
 
-    }else if(porcentaje < 0){
+            if(porcentaje > 0){
 
-        cambio.className = "red";
+                cambio.className = "green";
 
-    }else{
+            }else if(porcentaje < 0){
 
-        cambio.className = "yellow";
+                cambio.className = "red";
+
+            }else{
+
+                cambio.className = "yellow";
+
+            }
+
+        }
 
     }
-
-
-    // ESTADO
-
-    estado.textContent =
-        "🟢 CTF8 API conectada · Twelve Data · " +
-        new Date().toLocaleTimeString("es-CL");
 
 }
 
 
-// ===========================================
-// PRIMERA CARGA
-// ===========================================
+/* =====================================================
+   CONFIGURACIÓN DE MERCADOS
+===================================================== */
 
-actualizarEURUSD();
+const mercados = [
+
+/* ================= FOREX ================= */
+
+{
+    id:"eurusd",
+    symbol:"EUR/USD",
+    decimals:5
+},
+
+{
+    id:"gbpusd",
+    symbol:"GBP/USD",
+    decimals:5
+},
+
+{
+    id:"usdjpy",
+    symbol:"USD/JPY",
+    decimals:3
+},
+
+{
+    id:"usdchf",
+    symbol:"USD/CHF",
+    decimals:5
+},
+
+{
+    id:"usdcad",
+    symbol:"USD/CAD",
+    decimals:5
+},
+
+{
+    id:"audusd",
+    symbol:"AUD/USD",
+    decimals:5
+},
+
+{
+    id:"nzdusd",
+    symbol:"NZD/USD",
+    decimals:5
+},
+
+{
+    id:"usdclp",
+    symbol:"USD/CLP",
+    decimals:2
+},
 
 
-// ===========================================
-// ACTUALIZACIÓN CADA 60 SEGUNDOS
-// ===========================================
+/* ================= INDICES ================= */
+
+{
+    id:"spx",
+    symbol:"SPX",
+    decimals:2
+},
+
+{
+    id:"ndx",
+    symbol:"NDX",
+    decimals:2
+},
+
+{
+    id:"dji",
+    symbol:"DJI",
+    decimals:2
+},
+
+{
+    id:"rut",
+    symbol:"RUT",
+    decimals:2
+},
+
+{
+    id:"dax",
+    symbol:"DAX",
+    decimals:2
+},
+
+{
+    id:"nikkei",
+    symbol:"NI225",
+    decimals:2
+},
+
+{
+    id:"hsi",
+    symbol:"HSI",
+    decimals:2
+},
+
+{
+    id:"shanghai",
+    symbol:"SSEC",
+    decimals:2
+},
+
+{
+    id:"australia",
+    symbol:"ASX",
+    decimals:2
+},
+
+
+/* ================= MATERIAS PRIMAS ================= */
+
+{
+    id:"gold",
+    symbol:"XAU/USD",
+    decimals:2
+},
+
+{
+    id:"silver",
+    symbol:"XAG/USD",
+    decimals:3
+},
+
+{
+    id:"wti",
+    symbol:"WTI",
+    decimals:2
+},
+
+{
+    id:"brent",
+    symbol:"BRENT",
+    decimals:2
+},
+
+{
+    id:"copper",
+    symbol:"COPPER",
+    decimals:4
+},
+
+{
+    id:"gas",
+    symbol:"NATURALGAS",
+    decimals:3
+},
+
+
+/* ================= BONOS ================= */
+
+{
+    id:"us2y",
+    symbol:"US2Y",
+    decimals:4
+},
+
+{
+    id:"us10y",
+    symbol:"US10Y",
+    decimals:4
+},
+
+{
+    id:"us30y",
+    symbol:"US30Y",
+    decimals:4
+},
+
+{
+    id:"de10y",
+    symbol:"DE10Y",
+    decimals:4
+},
+
+{
+    id:"jp10y",
+    symbol:"JP10Y",
+    decimals:4
+},
+
+
+/* ================= CRIPTO ================= */
+
+{
+    id:"btc",
+    symbol:"BTC/USD",
+    decimals:2
+},
+
+{
+    id:"eth",
+    symbol:"ETH/USD",
+    decimals:2
+
+}
+
+];
+
+
+/* =====================================================
+   ACTUALIZAR TODOS LOS MERCADOS
+===================================================== */
+
+async function actualizarMercados(){
+
+    let conectados = 0;
+
+    for(const mercado of mercados){
+
+        const datos =
+            await obtenerDatos(
+                mercado.symbol
+            );
+
+
+        if(datos){
+
+            conectados++;
+
+        }
+
+
+        colocarDatos(
+            mercado.id,
+            datos,
+            mercado.decimals
+        );
+
+    }
+
+
+    /* ESTADO API */
+
+    const estado =
+        document.getElementById("api-status");
+
+
+    if(estado){
+
+        estado.textContent =
+            "🟢 CTF8 API conectada · " +
+            conectados +
+            "/" +
+            mercados.length +
+            " mercados · " +
+            new Date().toLocaleTimeString("es-CL");
+
+    }
+
+
+    /* CURVA BONOS */
+
+    calcularCurva();
+
+
+    /* FLUJO */
+
+    calcularFlujo();
+
+}
+
+
+/* =====================================================
+   CURVA 2Y - 10Y
+===================================================== */
+
+async function calcularCurva(){
+
+    const us2y =
+        await obtenerDatos("US2Y");
+
+    const us10y =
+        await obtenerDatos("US10Y");
+
+
+    const resultado =
+        document.getElementById("curve-price");
+
+    const estado =
+        document.getElementById("curve-status");
+
+
+    if(
+        !us2y ||
+        !us10y ||
+        !us2y.close ||
+        !us10y.close
+    ){
+
+        resultado.textContent = "N/D";
+
+        estado.textContent = "N/D";
+
+        estado.className = "yellow";
+
+        return;
+    }
+
+
+    const y2 =
+        Number(us2y.close);
+
+    const y10 =
+        Number(us10y.close);
+
+
+    const curva =
+        y10 - y2;
+
+
+    resultado.textContent =
+        curva.toFixed(4) + "%";
+
+
+    if(curva > 0){
+
+        estado.textContent =
+            "POSITIVA";
+
+        estado.className =
+            "green";
+
+    }else if(curva < 0){
+
+        estado.textContent =
+            "INVERTIDA";
+
+        estado.className =
+            "red";
+
+    }else{
+
+        estado.textContent =
+            "PLANA";
+
+        estado.className =
+            "yellow";
+
+    }
+
+}
+
+
+/* =====================================================
+   FLUJO BÁSICO
+===================================================== */
+
+async function calcularFlujo(){
+
+    const usd =
+        await obtenerDatos("DXY");
+
+    const spx =
+        await obtenerDatos("SPX");
+
+    const us10y =
+        await obtenerDatos("US10Y");
+
+    const gold =
+        await obtenerDatos("XAU/USD");
+
+    const wti =
+        await obtenerDatos("WTI");
+
+    const btc =
+        await obtenerDatos("BTC/USD");
+
+
+    actualizarEstadoFlujo(
+        "flow-usd",
+        usd
+    );
+
+    actualizarEstadoFlujo(
+        "flow-stocks",
+        spx
+    );
+
+    actualizarEstadoFlujo(
+        "flow-bonds",
+        us10y
+    );
+
+    actualizarEstadoFlujo(
+        "flow-metals",
+        gold
+    );
+
+    actualizarEstadoFlujo(
+        "flow-energy",
+        wti
+    );
+
+    actualizarEstadoFlujo(
+        "flow-crypto",
+        btc
+    );
+
+}
+
+
+/* =====================================================
+   ESTADO DEL FLUJO
+===================================================== */
+
+function actualizarEstadoFlujo(
+    id,
+    datos
+){
+
+    const elemento =
+        document.getElementById(id);
+
+
+    if(!elemento){
+
+        return;
+
+    }
+
+
+    if(!datos || datos.percent_change === undefined){
+
+        elemento.textContent =
+            "🟡 N/D";
+
+        elemento.className =
+            "status yellow";
+
+        return;
+
+    }
+
+
+    const cambio =
+        Number(datos.percent_change);
+
+
+    if(cambio > 0){
+
+        elemento.textContent =
+            "🟢 EN ALZA";
+
+        elemento.className =
+            "status green";
+
+    }else if(cambio < 0){
+
+        elemento.textContent =
+            "🔴 EN BAJA";
+
+        elemento.className =
+            "status red";
+
+    }else{
+
+        elemento.textContent =
+            "🟡 PLANO";
+
+        elemento.className =
+            "status yellow";
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+actualizarMercados();
+
+
+/* =====================================================
+   ACTUALIZACIÓN CADA 60 SEGUNDOS
+===================================================== */
 
 setInterval(
-    actualizarEURUSD,
+    actualizarMercados,
     60000
 );
-
 
 </script>
 
